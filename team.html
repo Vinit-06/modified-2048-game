@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.appcache">
+<head>
+  <meta charset="utf-8">
+  <title>Multiplayer 2048</title>
+
+  <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link href="style/cb_style.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="format-detection" content="telephone=no" />
+
+  <meta property="og:title" content="Multiplayer 2048"/>
+  <meta property="og:site_name" content="Multiplayer 2048"/>
+  <meta property="og:description" content="Join the numbers and get to the 10 tile! Careful: this game is extremely addictive!"/>
+  <meta property="og:image" content="">
+
+  <style>
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark .container,
+    body.dark .game-container,
+    body.dark .grid-container,
+    body.dark .tile-container {
+      background-color: #1e1e1e;
+    }
+
+    body.dark .grid-cell {
+      background-color: #2c2c2c;
+    }
+
+    body.dark .tile {
+      background-color: #444;
+      color: #fff;
+    }
+
+    body.dark .title,
+    body.dark .game-intro,
+    body.dark .game-explanation,
+    body.dark .scores-container,
+    body.dark .score-container,
+    body.dark .best-container,
+    body.dark .turn-container,
+    body.dark .player1Text,
+    body.dark .player2Text {
+      color: #e0e0e0;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      padding: 10px;
+      background: #555;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    body.dark .dark-toggle {
+      background: #aaa;
+      color: #121212;
+    }
+  </style>
+</head>
+<body onload="hideShow('hide')">
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">Multiplayer 2048</h1>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+        <div class="turn-container">0</div>
+      </div>
+    </div>
+
+    <div class="above-game">
+      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+      <a class="restart-button" id="rb">Restart</a>
+      <div class="rewind-container">
+        <a class="rewind-button" id="rwb">Undo 1</a>
+      </div>
+    </div>
+
+    <div class="above-game">
+      <p class="player1Text" id="p1"><strong>Player 1</strong></p>
+      <p class="player2Text" id="p2"><strong>Player 2</strong></p>
+    </div>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+          <a class="keep-playing-button">Keep going</a>
+          <a class="retry-button">Try again</a>
+          <a class="yes-button">Yes</a>
+          <a class="no-button">No</a>
+          <div class="score-sharing"></div>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <!-- 4x4 Grid -->
+        <div class="grid-row"><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div></div>
+        <div class="grid-row"><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div></div>
+        <div class="grid-row"><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div></div>
+        <div class="grid-row"><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div></div>
+      </div>
+
+      <div class="tile-container"></div>
+    </div>
+
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong> Player 1 uses the <strong>WASD</strong> keys to move the tiles while Player 2 uses the <strong>arrow</strong> keys. When two tiles with the same number touch, they <strong>merge into one!</strong> Players switch off turns moving the tiles.
+    </p>
+  </div>
+
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+
+  <script>
+    // Load saved dark mode preference
+    if (localStorage.getItem("darkMode") === "enabled") {
+      document.body.classList.add("dark");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      const mode = document.body.classList.contains("dark") ? "enabled" : "disabled";
+      localStorage.setItem("darkMode", mode);
+    }
+  </script>
+
+  <script src="js/bind_polyfill.js"></script>
+  <script src="js/classlist_polyfill.js"></script>
+  <script src="js/animframe_polyfill.js"></script>
+  <script src="js/keyboard_input_manager.js"></script>
+  <script src="js/html_actuator.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/tile.js"></script>
+  <script src="js/local_storage_manager.js"></script>
+  <script src="js/game_manager.js"></script>
+  <script src="js/application.js"></script>
+
+</body>
+</html>

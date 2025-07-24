@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048 Multiplayer(1 on 1)</title>
+  <link rel="stylesheet" href="style2.css">
+
+  <style>
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark .container {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+    }
+
+    body.dark .score-container,
+    body.dark p {
+      color: #ddd;
+    }
+
+    body.dark h1,
+    body.dark h2 {
+      color: #f0f0f0;
+    }
+
+    body.dark .grid {
+      background-color: #2c2c2c;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      padding: 10px 15px;
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    body.dark .dark-toggle {
+      background-color: #aaa;
+      color: #121212;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>2048 Multiplayer(1 on 1)</h1>
+  <div class="main">
+    <div class="container">
+      <h2>Player 1</h2>
+      <div class="score-container">Score: <span id="score1">0</span></div>
+      <div class="grid" id="grid1"></div>
+      <button id="start1">Restart</button>
+      <p>Best Score: <span id="best1">0</span></p>
+    </div>
+
+    <div class="container">
+      <h2>Player 2</h2>
+      <div class="score-container">Score: <span id="score2">0</span></div>
+      <div class="grid" id="grid2"></div>
+      <button id="start2">Restart</button>
+      <p>Best Score: <span id="best2">0</span></p>
+    </div>
+  </div>
+
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+
+  <script>
+    // On load, apply saved dark mode
+    if (localStorage.getItem("darkMode") === "enabled") {
+      document.body.classList.add("dark");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      const isDark = document.body.classList.contains("dark") ? "enabled" : "disabled";
+      localStorage.setItem("darkMode", isDark);
+    }
+  </script>
+
+  <script src="script2.js"></script>
+
+</body>
+</html>
